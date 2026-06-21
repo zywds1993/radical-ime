@@ -418,15 +418,24 @@ class RadicalIME : InputMethodService() {
                 gravity = android.view.Gravity.CENTER_VERTICAL
                 setPadding(4, 2, 4, 2)
                 Button(this@RadicalIME).apply {
+                    text = "常用"
+                    textSize = 10f
+                    setPadding(4, 2, 4, 2)
+                    setOnClickListener {
+                        inputEngine.showCommonRadicalCandidates()
+                        updateCandidates()
+                        tvStatus?.text = "偏旁: " + (inputEngine.selectedRadical ?: "") + " | 常用"
+                    }
+                    addView(this)
+                }
+                Button(this@RadicalIME).apply {
                     text = "全部"
                     textSize = 10f
                     setPadding(4, 2, 4, 2)
                     setOnClickListener {
-                        inputEngine.strokeFilter = null
-                        inputEngine.candidates = dataStore.getRadicalCandidates(inputEngine.selectedRadical ?: "").toMutableList()
-                        inputEngine.page = 0
+                        inputEngine.showAllRadicalCandidates()
                         updateCandidates()
-                        tvStatus?.text = "偏旁: " + (inputEngine.selectedRadical ?: "")
+                        tvStatus?.text = "偏旁: " + (inputEngine.selectedRadical ?: "") + " | 全部"
                     }
                     addView(this)
                 }
@@ -1081,7 +1090,7 @@ class RadicalIME : InputMethodService() {
                 currentKeyboardMode = "radical"
                 rbRadical?.isChecked = true
                 rbPinyin?.isChecked = false
-                scrollStrokeFilter?.visibility = View.GONE
+                scrollStrokeFilter?.visibility = if (inputEngine.selectedRadical != null) View.VISIBLE else View.GONE
                 layoutStrokeKeys?.visibility = View.GONE
                 radicalContainer?.visibility = View.VISIBLE
                 functionBar?.visibility = View.VISIBLE
@@ -1208,8 +1217,11 @@ class RadicalIME : InputMethodService() {
         candidateBar?.visibility = if (hasCandidates) View.VISIBLE else View.GONE
         pageBar?.visibility = if (hasCandidates) View.VISIBLE else View.GONE
         val totalPages = if (total > 0) (total + 6) / 7 else 1
+        val modeLabel = if (inputEngine.currentMode == "radical" && inputEngine.selectedRadical != null) {
+            if (inputEngine.radicalCommonOnly) "常用" else "全部"
+        } else ""
         val label = if (associationMode) "联想词" else "候选字"
-        tvPage?.text = label + "  第" + (inputEngine.page + 1) + "/" + totalPages + "页，共" + total + "个，可左右滑动"
+        tvPage?.text = label + (if (modeLabel.isNotEmpty()) "·" + modeLabel else "") + "  第" + (inputEngine.page + 1) + "/" + totalPages + "页，共" + total + "个，可左右滑动"
     }
 
     private fun updateInputDisplay() {

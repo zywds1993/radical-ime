@@ -175,10 +175,18 @@ class DataStore(private val context: Context) {
         }
     }
 
-    fun getRadicalCandidates(radical: String, strokeCount: Int? = null): List<String> {
+    private fun sortRadicalCandidates(radical: String, chars: List<String>): List<String> {
+        val distinct = chars.distinct()
+        return distinct.sortedWith(
+            compareBy<String> { if (it == radical) 0 else 1 }
+                .thenBy { charRank[it] ?: 999999 }
+        )
+    }
+
+    fun getRadicalCandidates(radical: String, strokeCount: Int? = null, commonOnly: Boolean = false): List<String> {
         if (strokeCount != null) {
             val key = "$radical|$strokeCount"
-            return radicalIndex[key] ?: emptyList()
+            return sortRadicalCandidates(radical, radicalIndex[key] ?: emptyList())
         }
         val result = mutableListOf<String>()
         for ((key, chars) in radicalIndex) {
@@ -186,12 +194,8 @@ class DataStore(private val context: Context) {
                 result.addAll(chars)
             }
         }
-        val distinct = result.distinct().toMutableList()
-        if (radical.length == 1 && distinct.contains(radical)) {
-            distinct.remove(radical)
-            distinct.add(0, radical)
-        }
-        return distinct
+        val sorted = sortRadicalCandidates(radical, result)
+        return if (commonOnly) sorted.take(84) else sorted
     }
 
     private fun searchSinglePinyin(pyRaw: String): List<String> {

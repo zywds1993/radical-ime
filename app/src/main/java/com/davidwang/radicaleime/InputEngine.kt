@@ -10,6 +10,7 @@ class InputEngine(private val dataStore: DataStore) {
     var currentMode: String = "radical"  // radical | stroke | pinyin | voice
     var selectedRadical: String? = null
     var strokeFilter: Int? = null
+    var radicalCommonOnly: Boolean = true
     var candidates: MutableList<String> = mutableListOf()
     var page: Int = 0
     val pageSize: Int = 7
@@ -25,6 +26,7 @@ class InputEngine(private val dataStore: DataStore) {
     fun resetInputState() {
         selectedRadical = null
         strokeFilter = null
+        radicalCommonOnly = true
         candidates.clear()
         page = 0
         voiceText = ""
@@ -35,11 +37,30 @@ class InputEngine(private val dataStore: DataStore) {
     /**
      * 输入偏旁
      */
-    fun inputRadical(radical: String) {
+    fun inputRadical(radical: String, commonOnly: Boolean = true) {
         selectedRadical = radical
         strokeFilter = null
+        radicalCommonOnly = commonOnly
         page = 0
-        candidates = dataStore.getRadicalCandidates(radical).toMutableList()
+        candidates = dataStore.getRadicalCandidates(radical, commonOnly = commonOnly).toMutableList()
+    }
+
+    fun showAllRadicalCandidates() {
+        selectedRadical?.let { radical ->
+            strokeFilter = null
+            radicalCommonOnly = false
+            page = 0
+            candidates = dataStore.getRadicalCandidates(radical, commonOnly = false).toMutableList()
+        }
+    }
+
+    fun showCommonRadicalCandidates() {
+        selectedRadical?.let { radical ->
+            strokeFilter = null
+            radicalCommonOnly = true
+            page = 0
+            candidates = dataStore.getRadicalCandidates(radical, commonOnly = true).toMutableList()
+        }
     }
 
     /**
@@ -49,7 +70,8 @@ class InputEngine(private val dataStore: DataStore) {
         selectedRadical?.let { radical ->
             strokeFilter = strokeCount
             page = 0
-            candidates = dataStore.getRadicalCandidates(radical, strokeCount).toMutableList()
+            radicalCommonOnly = false
+            candidates = dataStore.getRadicalCandidates(radical, strokeCount, commonOnly = false).toMutableList()
         }
     }
 
