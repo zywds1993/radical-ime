@@ -145,6 +145,30 @@ class RadicalIME : InputMethodService() {
         return getSharedPreferences("user_learning", MODE_PRIVATE).getInt("freq_" + text, 0)
     }
 
+    private fun penalizeText(text: String) {
+        val t = text.trim()
+        if (t.isEmpty()) return
+        getSharedPreferences("user_learning", MODE_PRIVATE)
+            .edit()
+            .putInt("freq_" + t, -50)
+            .apply()
+    }
+
+    private fun clearLearning() {
+        getSharedPreferences("user_learning", MODE_PRIVATE).edit().clear().apply()
+        inputEngine.page = 0
+        updateCandidates()
+        tvStatus?.text = "学习记录已清空"
+    }
+
+    private fun selectFirstCandidateOrSpace() {
+        if (inputEngine.candidates.isNotEmpty()) {
+            handleCandidateClick(0)
+        } else {
+            commitText(" ")
+        }
+    }
+
     private fun applyUserLearningRank() {
         if (inputEngine.candidates.size <= 1) return
         inputEngine.candidates = inputEngine.candidates
@@ -253,6 +277,16 @@ class RadicalIME : InputMethodService() {
         }
         infoRow.addView(btnVoice!!, lpWrap())
 
+        val btnClearLearning = Button(this@RadicalIME).apply {
+            text = "清学习"
+            textSize = 10f
+            minWidth = 0
+            minHeight = dp(30)
+            setPadding(4, 1, 4, 1)
+            setOnClickListener { clearLearning() }
+        }
+        infoRow.addView(btnClearLearning, lpWrap())
+
         tvStatus = TextView(this@RadicalIME).apply {
             textSize = 10f
             setTextColor(ContextCompat.getColor(this@RadicalIME, android.R.color.darker_gray))
@@ -278,24 +312,64 @@ class RadicalIME : InputMethodService() {
     }
 
     private fun createCandidateBar(): LinearLayout {
+        var downX = 0f
+        var downY = 0f
+        val swipeListener = View.OnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    downX = event.rawX
+                    downY = event.rawY
+                    false
+                }
+                MotionEvent.ACTION_UP -> {
+                    val dx = event.rawX - downX
+                    val dy = event.rawY - downY
+                    if (abs(dx) > dp(45) && abs(dx) > abs(dy)) {
+                        if (dx < 0) inputEngine.nextPage() else inputEngine.prevPage()
+                        updateCandidates()
+                        true
+                    } else {
+                        false
+                    }
+                }
+                else -> false
+            }
+        }
+
         return LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             setBackgroundColor(android.graphics.Color.WHITE)
             setPadding(2, 2, 2, 2)
-            layoutParams = lp(ViewGroup.LayoutParams.MATCH_PARENT, dp(44))
+            layoutParams = lp(ViewGroup.LayoutParams.MATCH_PARENT, dp(50))
+            setOnTouchListener(swipeListener)
             layoutCandidates = LinearLayout(this@RadicalIME).apply {
                 orientation = LinearLayout.HORIZONTAL
                 gravity = android.view.Gravity.CENTER_VERTICAL
+                setOnTouchListener(swipeListener)
                 for (i in 0 until 7) {
                     btnCandidates[i] = Button(this@RadicalIME).apply {
                         text = ""
-                        textSize = 22f
+                        textSize = 24f
                         minWidth = 0
-                        minHeight = dp(40)
-                        setPadding(2, 2, 2, 2)
+                        minHeight = dp(46)
+                        setPadding(1, 1, 1, 1)
                         layoutParams = lp(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
+                        setOnTouchListener(swipeListener)
                         setOnClickListener {
                             handleCandidateClick(i)
+                        }
+                        setOnLongClickListener {
+                            val absoluteIndex = inputEngine.page * inputEngine.pageSize + i
+                            if (absoluteIndex in 0 until inputEngine.candidates.size) {
+                                val item = inputEngine.candidates[absoluteIndex]
+                                penalizeText(item)
+                                inputEngine.page = 0
+                                updateCandidates()
+                                tvStatus?.text = "已降低候选: " + item
+                                true
+                            } else {
+                                false
+                            }
                         }
                     }
                     addView(btnCandidates[i]!!)
@@ -988,7 +1062,7 @@ class RadicalIME : InputMethodService() {
                 text = "空格"
                 textSize = 11f
                 layoutParams = lp(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { weight = 1f }
-                setOnClickListener { commitText(" ") }
+                setOnClickListener { selectFirstCandidateOrSpace() }
                 addView(this)
             }
             btnEnter = Button(this@RadicalIME).apply {
@@ -1135,7 +1209,7 @@ class RadicalIME : InputMethodService() {
         pageBar?.visibility = if (hasCandidates) View.VISIBLE else View.GONE
         val totalPages = if (total > 0) (total + 6) / 7 else 1
         val label = if (associationMode) "联想词" else "候选字"
-        tvPage?.text = label + " (" + (inputEngine.page + 1) + "/" + totalPages + ") 共" + total + "个"
+        tvPage?.text = label + "  第" + (inputEngine.page + 1) + "/" + totalPages + "页，共" + total + "个，可左右滑动"
     }
 
     private fun updateInputDisplay() {
