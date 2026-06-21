@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#F0F0F0"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#FFFFFF"
+        android:padding="8dp">
+
+        <RadioButton android:id="@+id/rb_overlay_radical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="偏旁模式" android:textSize="12sp" />
+        <RadioButton android:id="@+id/rb_overlay_pinyin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="拼音模式" android:textSize="12sp" />
+        <EditText android:id="@+id/et_overlay_pinyin" android:layout_width="100dp" android:layout_height="wrap_content" android:hint="拼音" android:textSize="14sp" android:visibility="gone" />
+        <Button android:id="@+id/btn_overlay_close" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="关闭" android:textSize="12sp" />
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="120dp" android:background="#FFFFFF" android:layout_margin="4dp">
+        <EditText android:id="@+id/et_overlay_input" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="18sp" android:padding="8dp" android:cursorVisible="true" android:textCursorDrawable="@null" />
+    </ScrollView>
+
+    <TextView android:id="@+id/tv_overlay_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="10sp" android:textColor="#888888" android:padding="2dp" android:gravity="end" />
+
+    <LinearLayout android:id="@+id/layout_overlay_candidates" android:layout_width="match_parent" android:layout_height="48dp" android:orientation="horizontal" android:background="#FFFFFF" android:padding="4dp" android:gravity="center_vertical">
+        <Button android:id="@+id/btn_overlay_candidate_0" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="0:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="1:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="2:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="3:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="4:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="5:" android:textSize="14sp" android:padding="2dp" />
+        <Button android:id="@+id/btn_overlay_candidate_6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="6:" android:textSize="14sp" android:padding="2dp" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="2dp">
+        <Button android:id="@+id/btn_overlay_prev" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="上一页" android:textSize="12sp" android:padding="8dp" />
+        <TextView android:id="@+id/tv_overlay_page" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1/1 共0个" android:textSize="10sp" android:textColor="#888888" android:gravity="center" />
+        <Button android:id="@+id/btn_overlay_next" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="下一页" android:textSize="12sp" android:padding="8dp" />
+    </LinearLayout>
+
+    <HorizontalScrollView android:id="@+id/scroll_overlay_stroke_filter" android:layout_width="match_parent" android:layout_height="36dp" android:background="#F5F5F5" android:padding="2dp">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="2dp">
+            <Button android:id="@+id/btn_overlay_stroke_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="全部" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="6" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="7" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="9" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="10" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="12" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="13" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_15" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_16" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="16" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_17" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="17" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_18" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="18" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_19" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="19" android:textSize="10sp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_stroke_20" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="20" android:textSize="10sp" android:padding="2dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="4dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:padding="0dp">
+            <Button android:id="@+id/btn_overlay_radical_0" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="亅" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="丿" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="丶" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="木" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="氵" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_5" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="艹" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_6" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="竹" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_7" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_8" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_14" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:padding="0dp">
+            <Button android:id="@+id/btn_overlay_radical_15" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_16" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⺮" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_17" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="山" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_18" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="王" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_19" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="石" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_20" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="田" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_21" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="女" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_22" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="贝" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_23" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="刂" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_24" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="车" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_25" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="示" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_26" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="米" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_27" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="食" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_28" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="囗" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_29" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="土" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_30" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="钅" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:padding="0dp">
+            <Button android:id="@+id/btn_overlay_radical_31" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="阝" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_32" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="心" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_33" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="立" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_34" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="弓" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_35" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="页" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_36" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="广" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_37" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="攵" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_38" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="冫" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_39" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="巛" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_40" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="虫" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_41" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="力" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_42" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="疒" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_43" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="礻" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_44" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="衤" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_45" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="雨" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_46" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="酉" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:padding="0dp">
+            <Button android:id="@+id/btn_overlay_radical_47" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="皿" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_48" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="骨" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_49" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="黑" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_50" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="鬼" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_51" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="尸" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_52" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="门" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_53" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="穴" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="大" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_55" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="弓" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_56" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="马" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_57" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="耳" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_58" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="走" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+            <Button android:id="@+id/btn_overlay_radical_59" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="欠" android:textSize="16sp" android:minWidth="36dp" android:padding="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:padding="4dp">
+        <Button android:id="@+id/btn_overlay_backspace" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="退格" android:textSize="12sp" />
+        <Button android:id="@+id/btn_overlay_clear" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="清空" android:textSize="12sp" />
+        <Button android:id="@+id/btn_overlay_space" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="空格" android:textSize="12sp" />
+        <Button android:id="@+id/btn_overlay_enter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="换行" android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

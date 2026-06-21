@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">偏旁键盘输入法</string>
+    <string name="ime_description">偏旁键盘输入法 - 用偏旁部首和笔画输入中文</string>
+    <string name="mode_radical">偏旁部首</string>
+    <string name="mode_stroke">笔画输入</string>
+    <string name="mode_pinyin">拼音输入</string>
+    <string name="mode_voice">语音输入</string>
+    <string name="btn_backspace">退格</string>
+    <string name="btn_clear">清空</string>
+    <string name="btn_prev">上一页</string>
+    <string name="btn_next">下一页</string>
+
+    <string name="accessibility_description">偏形输入法浮动键盘 - 通过无障碍服务实现</string>
+</resources>
